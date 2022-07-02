@@ -16,3 +16,4 @@ use Wdelfuego\NovaListCard\Http\Controllers\ListCardController;
 */
 
 Route::get('/data/{dataSourceKey}', [ListCardController::class, 'getData']);
+Route::get('/data/{dataSourceKey}/{buttonAction}/{buttonId}', [ListCardController::class, 'buttonAction']);

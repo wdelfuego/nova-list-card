@@ -19,14 +19,23 @@ class ListCardController extends BaseController
         $this->request = $request;
     }
     
-    public function getData(string $dataSourceKey)
+    private function dataSourceOrFail(string $dataSourceKey) : AbstractDataSource
     {
         $dataSource = DataSourceManager::dataSourceWithKey($dataSourceKey);
         if(!$dataSource instanceof AbstractDataSource)
         {
             throw new \Exception("Missing DataSource with key: $dataSourceKey");
         }
-        
-        return $dataSource->data();
+        return $dataSource;
+    }
+    
+    public function getData(string $dataSourceKey)
+    {
+        return $this->dataSourceOrFail($dataSourceKey)->data();
+    }
+    
+    public function buttonAction(NovaRequest $request, string $dataSourceKey, string $buttonAction, string $buttonId)
+    {
+        return $this->dataSourceOrFail($dataSourceKey)->withRequest($request)->onButtonAction($buttonAction, $buttonId);
     }
 }

@@ -13,7 +13,6 @@ class NovaListCard extends Card
 
     public function __construct(string $dataSourceKey)
     {
-        Log::debug("Constructing NovaListCard for data source with key : " .$dataSourceKey);
         $this->withMeta(['dataSourceKey' => $dataSourceKey]);
     }
 

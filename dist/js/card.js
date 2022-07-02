@@ -36,8 +36,23 @@ __webpack_require__.r(__webpack_exports__);
       this.items = response.data.items;
       this.title = response.data.title;
     },
-    visit: function visit(uri) {
-      Nova.visit(uri);
+    onclick: function onclick(item) {
+      var _this2 = this;
+
+      console.log(item);
+
+      if (item.buttonAction && item.buttonId) {
+        this.loading = true;
+        Nova.request().get('/nova-vendor/nova-list-card/data/' + this.card.dataSourceKey + '/' + item.buttonAction + '/' + item.buttonId).then(function (response) {
+          _this2.reloadFromResponse(response);
+
+          _this2.loading = false;
+        });
+      }
+
+      if (item.buttonUri) {
+        Nova.visit(item.buttonUri);
+      }
     }
   },
   data: function data() {
@@ -128,10 +143,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           innerHTML: item.message
         }, null, 8
         /* PROPS */
-        , _hoisted_10)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_11, [item.buttonUri && item.buttonLabel ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LoadingButton, {
+        , _hoisted_10)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_11, [item.buttonLabel ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LoadingButton, {
           key: 0,
           onClick: function onClick($event) {
-            return $options.visit(item.buttonUri);
+            return $options.onclick(item);
           },
           processing: _ctx.ui_blocked,
           disabled: _ctx.ui_blocked,

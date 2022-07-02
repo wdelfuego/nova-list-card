@@ -23,8 +23,8 @@
               </td>
               <td style="text-align:right">
                 <LoadingButton
-                  v-if="item.buttonUri && item.buttonLabel"
-                  @click="visit(item.buttonUri)"
+                  v-if="item.buttonLabel"
+                  @click="onclick(item)"
                   :processing="ui_blocked"
                   :disabled="ui_blocked"
                   component="DefaultButton"
@@ -75,8 +75,21 @@ export default {
         this.title = response.data.title;
     },
     
-    visit(uri) {
-      Nova.visit(uri)
+    onclick(item) {
+      console.log(item);
+      if(item.buttonAction && item.buttonId)
+      { 
+        this.loading = true;
+        Nova.request().get('/nova-vendor/nova-list-card/data/' + this.card.dataSourceKey + '/' + item.buttonAction + '/' + item.buttonId)
+          .then(response => { 
+            this.reloadFromResponse(response);
+            this.loading = false;
+          });
+      }
+      
+      if(item.buttonUri)
+      {  Nova.visit(item.buttonUri);
+      }
     }
     
   },
