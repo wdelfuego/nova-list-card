@@ -21,16 +21,19 @@
                   <span v-html="item.message"></span>
                 </p>
               </td>
-              <td style="text-align:right">
-                <LoadingButton
-                  v-if="item.buttonLabel"
-                  @click="onclick(item)"
-                  :processing="ui_blocked"
-                  :disabled="ui_blocked"
-                  component="DefaultButton"
-                >
-                  {{ item.buttonLabel }}
-                </LoadingButton>
+              <td style="text-align:right;width:25%">
+                <template v-for="button in item.buttons">
+                  <LoadingButton
+                    v-if="button.buttonLabel"
+                    @click="onclick(button)"
+                    :processing="ui_blocked"
+                    :disabled="ui_blocked"
+                    component="DefaultButton"
+                  >
+                    {{ button.buttonLabel }}
+                  </LoadingButton>
+                  &nbsp;
+                </template>
               </td>
             </tr>
           </template>
