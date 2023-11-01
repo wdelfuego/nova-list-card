@@ -36,3 +36,11 @@ div.wd-nova-list-card p span.badge {
   display:inline-block;
   margin: 0.8em;
 }
+
+div.wd-nova-list-card ul {
+  
+}
+
+div.wd-nova-list-card ul li {
+  margin-bottom: 0.5rem;
+}
