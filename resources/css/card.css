@@ -34,7 +34,18 @@ div.wd-nova-list-card table td {
 
 div.wd-nova-list-card p span.badge {
   display:inline-block;
-  margin: 0.8em;
+  padding: 0.6em;
+  margin: 0.2em;
+}
+
+div.wd-nova-list-card p span.badge.with-border {
+  padding: 0.4em 1.2em;
+  border-radius: 0.2em;
+  border: 1px rgba(var(--colors-primary-500), 0.25) solid;
+}
+
+div.wd-nova-list-card button {
+  margin: 0.1em;
 }
 
 div.wd-nova-list-card ul {
